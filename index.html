@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset='utf-8'>
 	<title>Kalle Anka Bingo</title>
-	<!-- <link rel="stylesheet" href="kalle.css"> -->
+	<link rel="stylesheet" href="kalle.css">
 	<script src="kalle.js"></script>
 	<meta name="viewport" content="height=800, width=560" />
 
-<style>
+<style type="text/css">
 	body {
-		background-color: white;
+		background-color: transparent;
 		color: black;
 		font-size: 16px;
 		font-family: "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
@@ -19,19 +20,44 @@
 	}
 
 	h1 {
-		font-size: 28px;
+		font-size: 32px;
+		text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+	}
+
+	p {
+		text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+	}
+
+	a {
+		color: white;
+		text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
 	}
 
 	table {
 		border-collapse: collapse;
+		background-color: white;
 	}
 
 	th, td {
 		padding: 10px;
-		border: 2px #666 solid;
+		border: 4px #666 solid;
 		text-align: center;
 		width: 20%;
+		border-color: black;
 	}
+
 
 	#free, .pickedBG {
 		background-color: #f66;
@@ -40,11 +66,23 @@
 	.winningBG {
 		background-image: url(images/redFlash.gif);
 	}
+
+	html { 
+	  background: url(bg_pic.jpg) no-repeat center center fixed; 
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+	}
 </style>
+
 
 </head>
 <body>
-<h1>Kalle Anka Bingo</h1>
+
+<!-- <div style="background-image: url('bg_pic.jpg');"> -->
+
+<h1 align="center"; style="color:white;">🎄 Kalle Ankas Julbingo 🦆</h1>
 <table cellpadding="8" cellspacing="2" id="table">
 	<tr>
 		<td id="square0">&nbsp;</td>
@@ -82,7 +120,7 @@
 		<td id="square23">&nbsp;</td>
 	</tr>
 </table>
-<p>När du får en ruta kan du klicka på den för att markera den.</p>
-<p><a href="script11.html" id="reload">Klicka här</a> för att generera en ny bricka.</p>
+<p style="font-size:90%; color:white;" align="center";>Klicka på en ruta för att markera den.</p>
+<p style="font-size:90%; color:white;" align="center";><a href="script11.html" id="reload">Klicka här</a> för att generera en ny bricka!</p>
 </body>
 </html>
