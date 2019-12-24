@@ -47,7 +47,6 @@ var buzzwords = new Array ("\"Hoho, sån målarfärg skulle man ju ha!\"",
 	"Någon börjar äta från andra lagret i Aladdinasken."
 );
 
-
 var usedWords = new Array(buzzwords.length);
 window.onload = initAll;
 
@@ -69,6 +68,7 @@ function newCard() {
 		var index = getRandomIndex();
 		id += convertToBase64(index << 1); //is disabled
 	}
+	//This will reload and parseQuery will eventually generate the board
 	window.location = "?id=" + id;
 }
 
@@ -115,11 +115,9 @@ function toggleBit(elem){
 	value = value ^ 1; //XOR with last bit == enabled bit
 
 	let newCharAt = convertToBase64(value);
-	
 	let newId = id.substring(0, index) + newCharAt + id.substring(index + 1);
 
 	window.location = "?id=" + newId;
-
 }
 
 /* 
@@ -133,17 +131,19 @@ function toggleBit(elem){
 */
 function parseQuery(id){
 	let index = 0;
-	for(let c of id){
+	for(var index = 0; index < id.length; index++){
+		let c = id[index];
 		let value = convertFromBase64(c);
 		let isEnabled = value & 1;
 		let buzzWordIndex = value >> 1;
 		var currSquare = "square" + index;
+
+		//Basically old setSquare
 		document.getElementById(currSquare).innerHTML = buzzwords[buzzWordIndex];
 		document.getElementById(currSquare).className = "";
 		if(isEnabled)
 			document.getElementById(currSquare).className = "pickedBG";
 		document.getElementById(currSquare).onmousedown = toggleColor;
-		index++;
 	}
 }
 
