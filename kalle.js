@@ -35,7 +35,12 @@ var buzzwords = new Array ("\"Hoho, sån målarfärg skulle man ju ha!\"",
 	"Någon säger att de inte orkar se ett av klippen igen.",
 	"Någon säger att Karl Bertil Jonsson är bättre.",
 	"Någon (som inte spelar) nämner Kalle Anka Bingo.",
-	"Fler personer ser på sina mobiler än på TV:n."
+	"Fler personer ser på sina mobiler än på TV:n.",
+	"Någon i familjen har/är på väg att druckit lite för mycket.",
+	"Någon går för att diska/röja upp julbordet.",
+	"Yngre släkting har fått i sig för mycket socker.",
+	"Nån rödklädd skäggig jävel dyker upp.",
+	"Någon yngre släkting tjatar om julklappar."
 );
 
 
