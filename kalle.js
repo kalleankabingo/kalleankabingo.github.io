@@ -1,18 +1,3 @@
-// var buzzwords = new Array ("\"Hoho, sån målarfärg skulle man ju ha!\"",	
-// 	"Någon vuxen klagar på att de yngre sitter på sina mobiltelefoner.",
-// 	"\"Nåja, vad är väl en bal på slottet?\"",
-// 	"Någon fejkskrattar.",
-// 	"Någon " + "sjunger".strike() + " försöker sjunga.",
-// 	"Någon somnar.",
-// 	"\"Här kommer din favoritdel, [namn]!\"",
-// 	"Någon imiterar kockarna från Lady och Lufsen.",
-// 	"Någon klagar över hur det var bättre förr när de ser klippet från nya Disneyfilmen.",
-// 	"Någon klagar över årets julvärd/\"Ingen jul utan Weise.\"",
-// 	"Sista pralinen i första lagret av Aladdinasken ligger orörd i mer än fem minuter.",
-
-
-// 	)
-
 var buzzwords = new Array ("\"Hoho, sån målarfärg skulle man ju ha!\"",	
 	"Någon vuxen klagar på att de yngre sitter på sina mobiltelefoner.",
 	"\"Nåja, vad är väl en bal på slottet?\"",
@@ -44,7 +29,13 @@ var buzzwords = new Array ("\"Hoho, sån målarfärg skulle man ju ha!\"",
 	"Någon imiterar mössen med ljus röst.",
 	"Någon hyschar folk att vara tysta.",
 	"Någon går för att slå in julklappar i sista minuten.",
-	"Någon börjar äta från andra lagret i Aladdinasken."
+	"Någon börjar äta från andra lagret i Aladdinasken.",
+	"Någon säger att man borde gå ut och röra på sig.",
+	"Någon går på toa.",
+	"Någon säger att de inte orkar se ett av klippen igen.",
+	"Någon säger att Karl Bertil Jonsson är bättre.",
+	"Någon (som inte spelar) nämner Kalle Anka Bingo.",
+	"Fler personer ser på sina mobiler än på TV:n."
 );
 
 
@@ -102,7 +93,7 @@ function toggleColor(evt) {
 	else {
 		thisSquare.className = "";
 	}
-	checkWin();
+	// checkWin();
 }
 
 // function checkWin() {
@@ -134,25 +125,6 @@ function toggleColor(evt) {
 // 	}
 // }
 
-
-
-
-// var table = document.querySelector('#table')
-// var selectedCells = table.getElementsByClassName('selected')
-
-// table.addEventListener('click', function(e) {
-//   var td = e.target
-  
-//   if (td.tagName !== 'TD') {
-//     return
-//   }
-  
-//   if (selectedCells.length) {
-//     selectedCells[0].className = ''    
-//   }
-
-//   td.className = 'selected'
-// })
 
 
 
