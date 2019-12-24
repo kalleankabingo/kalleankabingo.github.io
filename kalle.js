@@ -122,6 +122,15 @@ function toggleBit(elem){
 
 }
 
+/* 
+	Each char in the query represents a "base-64" value
+	The last bit of the value is the toggle bit. If 1, the 
+		square is enabled. 0 means it's not
+	The other (>> 1) is the random buzzword index that the 
+		square has as text. So if character 5 has index 9, it means
+		that the 5th square has the 9th buzzword
+
+*/
 function parseQuery(id){
 	let index = 0;
 	for(let c of id){
@@ -145,7 +154,6 @@ function checkQuery(){
 	if(id == null || id.length != 24){
 		return false; //Generate
 	}
-
 	parseQuery(id);
 
 	return true;
