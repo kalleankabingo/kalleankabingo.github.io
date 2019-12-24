@@ -130,7 +130,6 @@ function toggleBit(elem){
 
 */
 function parseQuery(id){
-	let index = 0;
 	for(var index = 0; index < id.length; index++){
 		let c = id[index];
 		let value = convertFromBase64(c);
