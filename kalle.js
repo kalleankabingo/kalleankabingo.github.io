@@ -113,7 +113,27 @@ function toggleColor(evt) {
 	else {
 		thisSquare.className = "";
 	}
-	checkWin();
+	toggleBit(thisSquare);
+	// checkWin();
+}
+
+function toggleBit(elem){
+	var index = elem.id;
+	index = parseInt(index.substring(6)); //Length of "square"
+
+	const urlParams = new URLSearchParams(window.location.search);
+	const id = urlParams.get('id');
+
+	let charAt = id[index];
+	let value = convertFromBase64(charAt);
+	value = value ^ 1; //XOR with last bit == enabled bit
+
+	let newCharAt = convertToBase64(value);
+	
+	let newId = id.substring(0, index) + newCharAt + id.substring(index + 1);
+
+	window.location = "?id=" + newId;
+
 }
 
 function parseQuery(id){
