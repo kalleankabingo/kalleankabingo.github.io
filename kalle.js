@@ -56,7 +56,6 @@ function initAll() {
 		if(checkQuery()){
 			return;
 		}
-		document.getElementById("reload").onclick = anotherCard;
 		newCard();
 	}
 	else {
@@ -67,23 +66,19 @@ function initAll() {
 function newCard() {
 	let id = "";
 	for (var i=0; i<24; i++) {
-		var index = setSquare(i);
+		var index = getRandomIndex();
 		id += convertToBase64(index << 1); //is disabled
 	}
 	window.location = "?id=" + id;
 }
 
-function setSquare(thisSquare) {
+function getRandomIndex() {
 	do {
 		var randomWord = Math.floor(Math.random() * buzzwords.length);
 	}
 	while (usedWords[randomWord]);
 
 	usedWords[randomWord] = true;
-	var currSquare = "square" + thisSquare;
-	document.getElementById(currSquare).innerHTML = buzzwords[randomWord];
-	document.getElementById(currSquare).className = "";
-	document.getElementById(currSquare).onmousedown = toggleColor;
 	return randomWord;
 }
 
@@ -130,7 +125,6 @@ function toggleBit(elem){
 function parseQuery(id){
 	let index = 0;
 	for(let c of id){
-		console.log(index, c);
 		let value = convertFromBase64(c);
 		let isEnabled = value & 1;
 		let buzzWordIndex = value >> 1;
@@ -149,8 +143,7 @@ function checkQuery(){
 	const id = urlParams.get('id');
 	//Must be there and of size 25 
 	if(id == null || id.length != 24){
-		// anotherCard(); //Will reload page again
-		return false;
+		return false; //Generate
 	}
 
 	parseQuery(id);
