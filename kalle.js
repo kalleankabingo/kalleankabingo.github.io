@@ -105,6 +105,15 @@ function toggleColor(evt) {
 	checkWin();
 }
 
+let base64String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-"
+function convertFromBase64(char){
+	return base64String.indexOf(char);
+}
+
+function convertToBase64(number){
+	return base64String[number];
+}
+
 // function checkWin() {
 // 	var winningOption = -1;
 // 	var setSquares = 0;
