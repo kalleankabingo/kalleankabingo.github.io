@@ -53,6 +53,9 @@ window.onload = initAll;
 
 function initAll() {
 	if (document.getElementById) {
+		if(checkQuery()){
+			return;
+		}
 		document.getElementById("reload").onclick = anotherCard;
 		newCard();
 	}
@@ -62,9 +65,16 @@ function initAll() {
 }
 
 function newCard() {
+	let id = "";
 	for (var i=0; i<24; i++) {
-		setSquare(i);
+		var index = setSquare(i);
+		id += convertToBase64(index << 1); //is disabled
 	}
+	window.location = "?id=" + id;
+}
+
+function generateSquare(thisSquare){
+	
 }
 
 function setSquare(thisSquare) {
@@ -78,6 +88,7 @@ function setSquare(thisSquare) {
 	document.getElementById(currSquare).innerHTML = buzzwords[randomWord];
 	document.getElementById(currSquare).className = "";
 	document.getElementById(currSquare).onmousedown = toggleColor;
+	return randomWord;
 }
 
 function anotherCard() {
@@ -105,7 +116,38 @@ function toggleColor(evt) {
 	checkWin();
 }
 
-let base64String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-"
+function parseQuery(id){
+	let index = 0;
+	for(let c of id){
+		console.log(index, c);
+		let value = convertFromBase64(c);
+		let isEnabled = value & 1;
+		let buzzWordIndex = value >> 1;
+		var currSquare = "square" + index;
+		document.getElementById(currSquare).innerHTML = buzzwords[buzzWordIndex];
+		document.getElementById(currSquare).className = "";
+		if(isEnabled)
+			document.getElementById(currSquare).className = "pickedBG";
+		document.getElementById(currSquare).onmousedown = toggleColor;
+		index++;
+	}
+}
+
+function checkQuery(){
+	const urlParams = new URLSearchParams(window.location.search);
+	const id = urlParams.get('id');
+	//Must be there and of size 25 
+	if(id == null || id.length != 24){
+		// anotherCard(); //Will reload page again
+		return false;
+	}
+
+	parseQuery(id);
+
+	return true;
+}
+
+let base64String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ?-"
 function convertFromBase64(char){
 	return base64String.indexOf(char);
 }
