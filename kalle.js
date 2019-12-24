@@ -73,10 +73,6 @@ function newCard() {
 	window.location = "?id=" + id;
 }
 
-function generateSquare(thisSquare){
-	
-}
-
 function setSquare(thisSquare) {
 	do {
 		var randomWord = Math.floor(Math.random() * buzzwords.length);
@@ -92,12 +88,7 @@ function setSquare(thisSquare) {
 }
 
 function anotherCard() {
-	for (var i=0; i<buzzwords.length; i++) {
-		usedWords[i] = false;
-	}
-
-	newCard();
-	return false;
+	window.location = "?id=";
 }
 
 function toggleColor(evt) {
