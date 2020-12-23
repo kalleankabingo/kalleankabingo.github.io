@@ -44,7 +44,8 @@ var buzzwords = new Array ("\"Hoho, sån målarfärg skulle man ju ha!\"",
 	"\"Den här julen kommer vi minnas länge.\"",
 	"Någon skiter i att hålla avstund och använda munskydd.",
 	"Familjens hypokondriker sitter skrämd, ensam i ett hörn.",
-	"Någon säger något hjärnbefriat om vaccinet."
+	"Någon säger något hjärnbefriat om vaccinet.",
+	"\"Hö hö hö, [valfri figur] håller ju inte avstånd!\""
 );
 
 
