@@ -48,13 +48,14 @@ var buzzwords = new Array ("\"Hoho, sån målarfärg skulle man ju ha!\"",
 	"\"Hö hö hö, [valfri figur] håller ju inte avstånd!\""
 );
 
-
 var usedWords = new Array(buzzwords.length);
 window.onload = initAll;
 
 function initAll() {
 	if (document.getElementById) {
-		document.getElementById("reload").onclick = anotherCard;
+		if(checkQuery()){
+			return;
+		}
 		newCard();
 	}
 	else {
@@ -63,31 +64,27 @@ function initAll() {
 }
 
 function newCard() {
+	let id = "";
 	for (var i=0; i<24; i++) {
-		setSquare(i);
+		var index = getRandomIndex();
+		id += convertToBase64(index << 1); //is disabled
 	}
+	//This will reload and parseQuery will eventually generate the board
+	window.location = "?id=" + id;
 }
 
-function setSquare(thisSquare) {
+function getRandomIndex() {
 	do {
 		var randomWord = Math.floor(Math.random() * buzzwords.length);
 	}
 	while (usedWords[randomWord]);
 
 	usedWords[randomWord] = true;
-	var currSquare = "square" + thisSquare;
-	document.getElementById(currSquare).innerHTML = buzzwords[randomWord];
-	document.getElementById(currSquare).className = "";
-	document.getElementById(currSquare).onmousedown = toggleColor;
+	return randomWord;
 }
 
 function anotherCard() {
-	for (var i=0; i<buzzwords.length; i++) {
-		usedWords[i] = false;
-	}
-
-	newCard();
-	return false;
+	window.location = "?id=";
 }
 
 function toggleColor(evt) {
@@ -103,7 +100,72 @@ function toggleColor(evt) {
 	else {
 		thisSquare.className = "";
 	}
+	toggleBit(thisSquare);
 	// checkWin();
+}
+
+function toggleBit(elem){
+	var index = elem.id;
+	index = parseInt(index.substring(6)); //Length of "square"
+
+	const urlParams = new URLSearchParams(window.location.search);
+	const id = urlParams.get('id');
+
+	let charAt = id[index];
+	let value = convertFromBase64(charAt);
+	value = value ^ 1; //XOR with last bit == enabled bit
+
+	let newCharAt = convertToBase64(value);
+	let newId = id.substring(0, index) + newCharAt + id.substring(index + 1);
+
+	window.location = "?id=" + newId;
+}
+
+/* 
+	Each char in the query represents a "base-64" value
+	The last bit of the value is the toggle bit. If 1, the 
+		square is enabled. 0 means it's not
+	The other (>> 1) is the random buzzword index that the 
+		square has as text. So if character 5 has index 9, it means
+		that the 5th square has the 9th buzzword
+
+*/
+function parseQuery(id){
+	for(var index = 0; index < id.length; index++){
+		let c = id[index];
+		let value = convertFromBase64(c);
+		let isEnabled = value & 1;
+		let buzzWordIndex = value >> 1;
+		var currSquare = "square" + index;
+
+		//Basically old setSquare
+		document.getElementById(currSquare).innerHTML = buzzwords[buzzWordIndex];
+		document.getElementById(currSquare).className = "";
+		if(isEnabled)
+			document.getElementById(currSquare).className = "pickedBG";
+		document.getElementById(currSquare).onmousedown = toggleColor;
+	}
+}
+
+function checkQuery(){
+	const urlParams = new URLSearchParams(window.location.search);
+	const id = urlParams.get('id');
+	//Must be there and of size 25 
+	if(id == null || id.length != 24){
+		return false; //Generate
+	}
+	parseQuery(id);
+
+	return true;
+}
+
+let base64String = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ?-"
+function convertFromBase64(char){
+	return base64String.indexOf(char);
+}
+
+function convertToBase64(number){
+	return base64String[number];
 }
 
 // function checkWin() {
